@@ -1,0 +1,65 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-5">
+    <input class="form-control" type="text" placeholder="Digite o Nome da Pessoa" [(ngModel)]="pessoa.nome">
+  </div>
+</div>
+<br />
+<div class="row">
+  <div class="col-sm-5">
+    <input class="form-control" type="number" placeholder="Digite a Idade" [(ngModel)]="pessoa.idade">
+  </div>
+</div>
+<br />
+<button type="button" class="btn btn-primary" (click)="adicionar()">Adicionar</button>
+<br />
+<br />
+
+<ng-container class="text-red" *ngIf="pessoas.length > 0">
+  <h2>Exemplo *ngFor</h2>
+  <ul *ngFor="let pessoa of pessoas; index as i">
+    <li>
+      {{ pessoa.nome }} - {{ pessoa.idade }}
+      <button type="button" class="btn btn-danger" (click)="excluirPorIndex(i)">Excluir</button>
+    </li>
+  </ul>
+
+  <h2>Exemplo *ngSwitch</h2>
+  <ul *ngFor="let pessoa of pessoas" [ngSwitch]="pessoa.idade">
+    <li *ngSwitchCase="30">
+      {{ pessoa.nome }} - {{ pessoa.idade }}
+    </li>
+    <li *ngSwitchCase="32">
+      {{ pessoa.nome }} - {{ pessoa.idade }}
+    </li>
+  </ul>
+
+  <h2>Exemplo *ngStyle</h2>
+  <ul *ngFor="let pessoa of pessoas">
+    <li>
+      <label [ngStyle]="{
+          'color': pessoa.idade == 30 ? 'red' : 
+          (pessoa.idade > 30 ? 'blue' : 'green')
+        }">
+        {{ pessoa.nome }} - {{ pessoa.idade }}
+      </label>
+    </li>
+  </ul>
+
+  <h2>Exemplo *ngClass</h2>
+  <ul *ngFor="let pessoa of pessoas">
+    <li>
+      <label [ngClass]="{ 'text-red': pessoa.idade < 30,
+                          'text-blue': pessoa.idade == 30,
+                          'text-green': pessoa.idade > 30}">
+        {{pessoa.nome}} - {{pessoa.idade}}
+      </label>
+    </li>
+  </ul>
+</ng-container>
